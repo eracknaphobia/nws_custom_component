@@ -12,3 +12,9 @@ To create an sensor instance add to your sensor definitions:
 - platform: nws_alerts
   zone_id: 'PAC049'
 ```
+or comma separated values
+
+```
+- platform: nws_alerts
+  zone_id: 'PAC049,WVC031'
+```
