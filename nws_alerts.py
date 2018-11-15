@@ -48,7 +48,7 @@ class NWSAlertSensor(Entity):
         self._event = None
         self._display_desc = None
         self._spoken_desc = None
-        self._zone_id = zone_id
+        self._zone_id = zone_id.replace(' ', '')
         self.update()
 
     @property
@@ -102,8 +102,11 @@ class NWSAlertSensor(Entity):
         r = requests.get(url, headers=headers)
         _LOGGER.debug("getting state, %s", url)
         if r.status_code == 200:
-            if 'zones' in r.json() and self._zone_id in r.json()['zones']:
-                values = self.get_alerts()
+            if 'zones' in r.json():
+                for zone in self._zone_id.split(','):
+                    if zone in r.json()['zones']:
+                        values = self.get_alerts()
+                        break
 
         return values
 
