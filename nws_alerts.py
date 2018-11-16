@@ -1,3 +1,17 @@
+'''
+---------------------------------------------------------
+NWS Alerts
+---------------------------------------------------------
+VERSION: 0.0.2
+Forum: https://community.home-assistant.io/t/severe-weather-alerts-from-the-us-national-weather-service/71853
+
+API Documentation
+---------------------------------------------------------
+https://www.weather.gov/documentation/services-web-api
+https://forecast-v3.weather.gov/documentation
+---------------------------------------------------------
+'''
+
 import requests
 import logging
 import voluptuous as vol
@@ -8,17 +22,11 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.entity import Entity
 from homeassistant.util import Throttle
 
-# ---------------------------------------------------------
-# API Documentation
-# ---------------------------------------------------------
-# https://www.weather.gov/documentation/services-web-api
-# https://forecast-v3.weather.gov/documentation
-# ---------------------------------------------------------
 
 API_ENDPOINT = 'https://api.weather.gov'
 USER_AGENT = 'Home Assistant'
 DEFAULT_ICON = 'mdi:alert'
-MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=5)
+MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=1)
 _LOGGER = logging.getLogger(__name__)
 DEFAULT_NAME = 'NWS Alerts'
 CONF_ZONE_ID = 'zone_id'
@@ -148,7 +156,7 @@ class NWSAlertSensor(Entity):
                 if display_desc != '':
                     display_desc += '\n\n'
 
-                display_desc += '%s\n%s\n%s' % (headline, description, instruction)
+                display_desc += '<b>%s</b>\n%s\n%s\n%s' % (event, headline, description, instruction)
 
             if headlines:
                 num_headlines = len(headlines)
