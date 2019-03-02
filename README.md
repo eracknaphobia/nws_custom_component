@@ -3,7 +3,11 @@ National Weather Service custom component for Home Assistant
 
 This should be placed in your configuration folder:
 ```
+For HA .87 and lower
 <config directory>/custom_components/sensor/nws_alerts.py
+
+For HA .88 and higher
+<config directory>/custom_components/nws_alerts/sensor.py
 ```
 
 
