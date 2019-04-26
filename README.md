@@ -11,7 +11,10 @@ For HA .88 and higher (rename nws_alerts.py to sensor.py)
 ```
 <config directory>/custom_components/nws_alerts/sensor.py
 ```
-
+For HA .92 and higher (add a empty file named __init__.py to the folder nws_alerts)
+```
+<config directory>/custom_components/nws_alerts/__init__.py
+```
 
 To create an sensor instance add to your sensor definitions:
 ```
